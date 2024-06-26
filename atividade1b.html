@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora de Média</title>
+  <style>
+    #media {
+      font-weight: bold;
+    }
+    #situacao {
+      font-weight: bold;
+    }
+    .azul {
+      color: blue;
+    }
+    .vermelho {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <label for="nota1">Nota 1:</label>
+  <input type="number" id="nota1"><br>
+  
+  <label for="nota2">Nota 2:</label>
+  <input type="number" id="nota2"><br>
+  
+  <button onclick="calcularMedia()">Calcular Média</button>
+  
+  <span id="media"></span><br>
+  <span id="situacao"></span>
+
+  <script>
+    function calcularMedia() {
+      // Obter nota1
+      var nota1 = parseFloat(document.getElementById("nota1").value);
+
+      // Obter nota2
+      var nota2 = parseFloat(document.getElementById("nota2").value);
+
+      // Calcular média
+      var media = (nota1 + nota2) / 2;
+
+      // Definir situação e cor
+      var situacao, cor;
+      if (media >= 6) {
+        situacao = "APROVADO";
+        cor = "azul";
+      } else {
+        situacao = "REPROVADO";
+        cor = "vermelho";
+      }
+
+      // Mostrar média e situação
+      document.getElementById("media").innerHTML = "Média: " + media.toFixed(2);
+      document.getElementById("situacao").innerHTML = "Situação: " + situacao;
+      document.getElementById("situacao").className = cor;
+    }
+  </script>
+</body>
+</html>

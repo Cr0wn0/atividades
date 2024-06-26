@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de IMC</title>
+  <style>
+    .green {
+      color: green;
+    }
+
+    .orange {
+      color: orange;
+    }
+
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculadora de IMC</h1>
+  <form id="imcForm">
+    <label for="weight">Peso (kg):</label>
+    <input type="number" id="weight" name="weight" required>
+    <br>
+    <label for="height">Altura (m):</label>
+    <input type="number" id="height" name="height" step="0.01" required>
+    <br>
+    <label for="item">Item da Lista:</label>
+    <input type="text" id="item" name="item" required>
+    <br>
+    <label for="color">Cor do Item:</label>
+    <input type="radio" id="green" name="color" value="green" checked>
+    <label for="green">Verde</label>
+    <input type="radio" id="orange" name="color" value="orange">
+    <label for="orange">Laranja</label>
+    <input type="radio" id="red" name="color" value="red">
+    <label for="red">Vermelho</label>
+    <br>
+    <button type="submit">Calcular</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("imcForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      var weight = parseFloat(document.getElementById("weight").value);
+      var height = parseFloat(document.getElementById("height").value);
+
+      var imc = weight / (height * height);
+
+      var resultElement = document.getElementById("result");
+      resultElement.innerHTML = "Seu IMC é: " + imc.toFixed(2) + "<br>";
+
+      if (imc < 18.5) {
+        resultElement.innerHTML += "Situação: <span class='orange'>Abaixo do peso</span>";
+      } else if (imc < 24.9) {
+        resultElement.innerHTML += "Situação: <span class='green'>Peso normal</span>";
+      } else if (imc < 29.9) {
+        resultElement.innerHTML += "Situação: <span class='orange'>Acima do peso</span>";
+      } else if (imc < 34.9) {
+        resultElement.innerHTML += "Situação: <span class='red'>Obesidade I</span>";
+      } else if (imc < 39.9) {
+        resultElement.innerHTML += "Situação: <span class='red'>Obesidade II</span>";
+      } else {
+        resultElement.innerHTML += "Situação: <span class='red'>Obesidade III</span>";
+      }
+
+      var item = document.getElementById("item").value;
+      var color = document.querySelector('input[name="color"]:checked').value;
+
+      var listItemElement = document.createElement("li");
+      listItemElement.innerText = item;
+      listItemElement.style.color = color;
+
+      var listElement = document.getElementById("list");
+      listElement.appendChild(listItemElement);
+    });
+  </script>
+</body>
+</html>
